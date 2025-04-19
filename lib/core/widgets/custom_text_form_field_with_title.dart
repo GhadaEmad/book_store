@@ -5,11 +5,13 @@ import 'package:book_store/core/theming/app_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+
 class CustomTextFormFieldWithTitle extends StatelessWidget {
-  const CustomTextFormFieldWithTitle({super.key, required this.title, required this.hintText});
+  const CustomTextFormFieldWithTitle({super.key, required this.title, required this.hintText, this.controller});
 
   final String title;
   final String hintText;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +21,7 @@ class CustomTextFormFieldWithTitle extends StatelessWidget {
         Text(title,style: AppTextStyle.font16Regular,),
         verticalSpace(8),
         TextFormField(
+          controller: controller,
           cursorColor: AppColors.mainColor,
           decoration: InputDecoration(
             contentPadding:EdgeInsets.symmetric(horizontal: 16.w) ,
