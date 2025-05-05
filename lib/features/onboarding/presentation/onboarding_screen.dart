@@ -1,6 +1,8 @@
 
 
- import 'package:book_store/features/splash/presentation/splash_screen.dart';
+ import 'package:book_store/core/services/local/shared_prefs_helper/prefs_keys.dart';
+import 'package:book_store/core/services/local/shared_prefs_helper/shared_prefs_helper.dart';
+import 'package:book_store/features/splash/presentation/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -25,7 +27,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
              crossAxisAlignment:CrossAxisAlignment.end,
              children: [
                TextButton(onPressed: (){
-
+               SharedPrefsHelper.saveData(key: PrefsKeys.onBoardingIsOpened, value: true);
                  Navigator.push(context, MaterialPageRoute(builder: (context)=>SplashScreen()));
 
                }, child: Text("Skip")),
