@@ -22,7 +22,6 @@ class LoginCubit extends Cubit<LoginState> {
     }else if(response is Response){
       if(response.statusCode==200){
         debugPrint(response.data.toString());
-        AppFunctions.saveUserToken(response.data["data"]["token"]);
         emit(LoginSuccess());
       }else{
         emit(LoginError(response.data["message"]));

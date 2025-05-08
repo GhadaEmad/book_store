@@ -3,8 +3,10 @@ import 'package:book_store/core/helpers/app_images.dart';
 import 'package:book_store/core/helpers/spacing.dart';
 import 'package:book_store/core/widgets/custom_app_button.dart';
 import 'package:book_store/features/create_account/presentation/create_account_screen.dart';
+import 'package:book_store/features/login/cubit/login_cubit.dart';
 import 'package:book_store/features/login/presentation/log_in_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -34,7 +36,10 @@ class SplashScreen extends StatelessWidget {
               CustomAppButton(
                 title: "Login",
                 onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>LogInScreen()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>BlocProvider(
+  create: (context) => LoginCubit(),
+  child: LogInScreen(),
+)));
                 },
               ),
               verticalSpace(16),
