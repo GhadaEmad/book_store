@@ -4,7 +4,7 @@ import 'package:book_store/core/services/local/shared_prefs_helper/shared_prefs_
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../data/models/create_account_request.dart';
@@ -25,8 +25,8 @@ class CreateAccountCubit extends Cubit<CreateAccountState> {
     final response=await CreateAccountRepo.createAccount(userData: userData) ;
 
     if (response is DioException) {
-      print("dio error////");
-      print(response.response?.data["errors"]["email"][0].toString());
+      debugPrint("dio error////");
+      debugPrint(response.response?.data["errors"]["email"][0].toString());
       emit(CreateAccountError(  response.response?.data["errors"]["email"][0].toString() ?? ""));
 
     } else if (response["status"] == 201) {
