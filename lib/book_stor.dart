@@ -1,19 +1,19 @@
-
-import 'package:book_store/core/helpers/app_constants.dart';
-import 'package:book_store/core/services/local/shared_prefs_helper/prefs_keys.dart';
-import 'package:book_store/core/services/local/shared_prefs_helper/shared_prefs_helper.dart';
-
-import 'package:book_store/features/onboarding/presentation/onboarding_screen.dart';
-import 'package:book_store/features/splash/presentation/splash_screen.dart';
-import 'package:book_store/features/test_screen.dart';
+import 'package:book_store/features/login/cubit/login_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-
+import 'core/helpers/app_constants.dart';
+import 'core/services/local/shared_prefs_helper/prefs_keys.dart';
+import 'core/services/local/shared_prefs_helper/shared_prefs_helper.dart';
+import 'features/bottom_nav_bar/presentation/bottom_nav_bar_screen.dart';
+import 'features/create_account/cubit/create_account_cubit.dart';
+import 'features/create_account/presentation/create_account_screen.dart';
+import 'features/home/presentation/home_screen.dart';
+import 'features/login/presentation/log_in_screen.dart';
+import 'features/onboarding/presentation/onboarding_screen.dart';
+import 'features/splash/presentation/splash_screen.dart';
 class BookStore extends StatelessWidget {
   const BookStore({super.key});
-
 
   @override
   @override
@@ -28,27 +28,38 @@ class BookStore extends StatelessWidget {
             fontFamily: AppConstants.appFontFamily,
             scaffoldBackgroundColor: Color(0XFFf5f5f5)
         ),
-        home:startScreen(),
+        routes: {
+          "/Onboarding": (context) => OnboardingScreen(),
+          "/splash": (context) => SplashScreen(),
+          "/login": (context) =>
+              BlocProvider(
+                create: (context) => LoginCubit(),
+                child: LogInScreen(),
+              ),
+          "/createAccount": (context) =>
+              BlocProvider(
+                create: (context) => CreateAccountCubit(),
+                child: CreateAccountScreen(),
+
+              ),
+          "/home": (context) => HomeScreen(),
+          "/bottomNav":(context)=>BottomNavBarScreen(),
+        },
+        initialRoute: startScreen(),
       ),
     );
   }
-
-  String? getToken(){
-
+  String? getToken() {
     return SharedPrefsHelper.getData(PrefsKeys.tokenKey);
   }
-
-  Widget startScreen() {
+  String startScreen() {
     if (getToken() != null) {
-      return TestScreen();
+      return "/bottomNav";
     } else
     if (SharedPrefsHelper.getData(PrefsKeys.onBoardingIsOpened) == true) {
-      return SplashScreen();
+      return "/splash";
     } else {
-      return OnboardingScreen();
+      return "/Onboarding";
     }
   }
-
-
-
 }

@@ -42,6 +42,7 @@ class _LogInScreenState extends State<LogInScreen> {
           ));
     } else if (state is LoginSuccess) {
     Navigator.pop(context);
+    Navigator.pushNamedAndRemoveUntil(context, "/bottomNav", (route) => false,);
     } else if (state is LoginError) {
     Navigator.pop(context);
     showDialog(
@@ -55,10 +56,12 @@ class _LogInScreenState extends State<LogInScreen> {
           child: Column(
             children: [
               CustomTextFormFieldWithTitle(title: "Email",
+                controller: emailController,
                 hintText: "Example@gmail.com",
               ),
 
               CustomTextFormFieldWithTitle(title: "Password",
+                controller: passController,
                 hintText: "**********",
               ),
 

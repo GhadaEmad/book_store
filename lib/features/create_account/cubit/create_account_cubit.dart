@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../core/helpers/app_funcations.dart';
 import '../data/models/create_account_request.dart';
 import '../data/repo/creat_account_repo.dart';
 
@@ -30,16 +31,12 @@ class CreateAccountCubit extends Cubit<CreateAccountState> {
       emit(CreateAccountError(  response.response?.data["errors"]["email"][0].toString() ?? ""));
 
     } else if (response["status"] == 201) {
-     _saveUserToken(response.data["data"]["token"]);
+      AppFuncations.saveUserToken(response.data["data"]["token"]);
       emit(CreateAccountSuccess());
     }
 
 
        }
-
-    void _saveUserToken (String token){
-      SharedPrefsHelper.saveData(key: PrefsKeys.tokenKey, value:true);
-    }
 
 
   }

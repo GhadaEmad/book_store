@@ -36,10 +36,8 @@ class SplashScreen extends StatelessWidget {
               CustomAppButton(
                 title: "Login",
                 onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>BlocProvider(
-  create: (context) => LoginCubit(),
-  child: LogInScreen(),
-)));
+                  Navigator.pushNamed(context, "/login");
+
                 },
               ),
               verticalSpace(16),
@@ -47,7 +45,7 @@ class SplashScreen extends StatelessWidget {
                 title: "Create Account",
                 backgroundColor: Colors.white,
                 onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>CreateAccountScreen()));
+                  Navigator.pushNamed(context, "/createAccount");
                 },
               ),
             ],
